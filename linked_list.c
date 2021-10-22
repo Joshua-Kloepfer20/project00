@@ -29,21 +29,33 @@ struct song_node * free_list(struct song_node * node) {
 }
 
 struct song_node * remove_node(struct song_node *node, char *name, char *artist) {
+//    printf("attempting to remove song: %s by %s\n", name, artist);
     struct song_node *x = node;
     struct song_node *y = node;
-    if (strcasecmp(node->name, name) == 0 && strcasecmp(node->artist, artist)) {
+    if (strcasecmp(node->name, name) == 0 && strcasecmp(node->artist, artist) == 0) {
         x = node->next;
         free(node);
+//	printf("removed song: %s by %s\n", name, artist);
         return x;
     }
     while (x != NULL) {
-        if (strcasecmp(x->name, name) == 0 && strcasecmp(x->artist, artist)) {
+        if (strcasecmp(x->name, name) == 0 && strcasecmp(x->artist, artist) == 0) {
             y->next = x->next;
             free(x);
+//	    printf("removed song: %s by %s\n", name, artist);
             return node;
         }
         y = x;
         x = x->next;
     }
     return node;
+}
+struct song_node * find_node(struct song_node *node, char *name, char *artist) {
+   while (node != NULL) {
+       if (strcasecmp(node->name, name) == 0 && strcasecmp(node->artist, artist) == 0) {
+           return node;
+}
+       node = node->next;
+}
+  return node;
 }
