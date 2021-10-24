@@ -97,6 +97,7 @@ struct song_node * insert(struct song_node * node, char *name, char *artist) {
     strcpy(newNode->name, name);
     strcpy(newNode->artist, artist);
     x->next = newNode;
+    newNode->next = NULL;
     return node;
 }
 struct song_node * find_artist(struct song_node *node, char *artist) {
